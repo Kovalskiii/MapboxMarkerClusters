@@ -119,7 +119,7 @@ export const eventData = [
     "status": "active",
     "isApproved": "true",
     "endDate": "2023-06-10T20:00:00.000Z",
-    "eventType": "night club",
+    "eventType": "brunch",
     "startDate": "2023-06-10T15:00:00.000Z",
     "covers": [
       {
@@ -152,7 +152,7 @@ export const eventData = [
     "status": "active",
     "isApproved": "true",
     "endDate": "2023-05-31T02:00:00.000Z",
-    "eventType": "night club",
+    "eventType": "house party",
     "startDate": "2023-05-30T21:00:00.000Z",
     "covers": [
       {
@@ -251,7 +251,7 @@ export const eventData = [
     "status": "active",
     "isApproved": "true",
     "endDate": "2023-05-28T02:00:00.000Z",
-    "eventType": "night club",
+    "eventType": "rooftop",
     "startDate": "2023-05-27T22:00:00.000Z",
     "covers": [
       {
@@ -317,7 +317,7 @@ export const eventData = [
     "status": "active",
     "isApproved": "true",
     "endDate": "2023-05-28T02:00:00.000Z",
-    "eventType": "night club",
+    "eventType": "yacht",
     "startDate": "2023-05-27T22:00:00.000Z",
     "covers": [
       {
