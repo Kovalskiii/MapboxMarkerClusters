@@ -40,60 +40,60 @@ export default function MapScreen({ navigation }) {
           rotateEnabled={false}
         >
           {eventMarkersData && (
-          <Mapbox.ShapeSource
-            ref={shapeSource}
-            id="events"
-            cluster={true}
-            clusterMaxZoom={18}
-            clusterRadius={60}
-            shape={eventMarkersData}
-            onPress={async marker => {
-              if (marker.features[0].properties.cluster) {
-                const collection = await shapeSource.current.getClusterLeaves(
-                  marker.features[0],
-                  marker.features[0].properties.point_count,
-                  0,
-                )
-                // Do what you want if the user clicks the cluster
-                console.log('Cluster', collection)
-              } else {
-                // Do what you want if the user clicks individual marker
-                console.log('One marker', marker)
-              }
-            }}
-          >
-            <Mapbox.Images images={{clusterImg: udazzyEventImg12, singleMarkerImg: udazzyEventImg11} } />
-            <Mapbox.SymbolLayer
-              id="clusteredMarkerCount"
-              style={styles.markerCount}
-              filter={['has', 'point_count']}
-            />
-            <Mapbox.CircleLayer
-              id="clusteredMarkersCircle"
-              belowLayerID="clusteredMarkerCount"
-              filter={['has', 'point_count']}
-              style={styles.markerCountCircle}
-            />
-
-            <Mapbox.SymbolLayer
-              id="clusteredMarkersImage"
-              filter={['has', 'point_count']}
-              style={styles.clusterImage}
-            />
-
-            <Mapbox.SymbolLayer
-              id="singleMarker"
-              filter={['!', ['has', 'point_count']]}
-              style={{
-                iconImage: 'singleMarkerImg',
-                iconSize: 0.4,
-                // iconOpacity: 1,
-                // iconAllowOverlap: true,
-                // iconHaloBlur: 0
+            <Mapbox.ShapeSource
+              ref={shapeSource}
+              id="events"
+              cluster={true}
+              clusterMaxZoom={18}
+              clusterRadius={60}
+              shape={eventMarkersData}
+              onPress={async marker => {
+                if (marker.features[0].properties.cluster) {
+                  const collection = await shapeSource.current.getClusterLeaves(
+                    marker.features[0],
+                    marker.features[0].properties.point_count,
+                    0,
+                  )
+                  // Do what you want if the user clicks the cluster
+                  console.log('Cluster',collection)
+                } else {
+                  // Do what you want if the user clicks individual marker
+                  console.log('One marker', marker)
+                }
               }}
-            />
+            >
+              <Mapbox.Images images={{clusterImg: udazzyEventImg12, singleMarkerImg: udazzyEventImg11} } />
+              <Mapbox.SymbolLayer
+                id="clusteredMarkerCount"
+                style={styles.markerCount}
+                filter={['has', 'point_count']}
+              />
+              <Mapbox.CircleLayer
+                id="clusteredMarkersCircle"
+                belowLayerID="clusteredMarkerCount"
+                filter={['has', 'point_count']}
+                style={styles.markerCountCircle}
+              />
 
-          </Mapbox.ShapeSource>
+              <Mapbox.SymbolLayer
+                id="clusteredMarkersImage"
+                filter={['has', 'point_count']}
+                style={styles.clusterImage}
+              />
+
+              <Mapbox.SymbolLayer
+                id="singleMarker"
+                filter={['!', ['has', 'point_count']]}
+                style={{
+                  iconImage: 'singleMarkerImg',
+                  iconSize: 0.4,
+                  // iconOpacity: 1,
+                  // iconAllowOverlap: true,
+                  // iconHaloBlur: 0
+                }}
+              />
+
+            </Mapbox.ShapeSource>
           )}
         </Mapbox.MapView>
       </View>
@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
     iconImage: 'clusterImg',
     iconSize: 0.5,
     iconAllowOverlap: true,
+    iconIgnorePlacement: true
   },
 
   markerCount: {

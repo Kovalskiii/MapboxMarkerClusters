@@ -8,3 +8,5 @@
 - execute command: ```npm run android``` for android
 - execute command: ```npm run ios``` for ios
 ***
+![img.png](img.png)
+![img_1.png](img_1.png)
