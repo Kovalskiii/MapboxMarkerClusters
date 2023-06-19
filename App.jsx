@@ -6,6 +6,8 @@ import { eventData } from "./src/eventsData";
 import udazzyEventImg11 from './src/assets/images/udazzy-event1.1.png'
 import udazzyEventImg12 from './src/assets/images/udazzy-event1.2.png'
 import Yacht from './src/assets/images/yacht.svg'
+import Party from './src/assets/images/party.svg'
+import NightClub from './src/assets/images/night-club.svg'
 
 Mapbox.setWellKnownTileServer('Mapbox');
 Mapbox.setAccessToken('pk.eyJ1Ijoibmlrb2xvczE5OTkiLCJhIjoiY2xlNDl3aWFrMDEwMDNwcGh4ajFqb3NybyJ9.yy0sE8uLdPENNF3v5_pnlA');
@@ -62,12 +64,41 @@ export default function MapScreen({ navigation }) {
                 }
               }}
             >
-              <Mapbox.Images images={{clusterImg: udazzyEventImg12, singleMarkerImg: udazzyEventImg11} } />
+              {/*<Mapbox.Images images={{clusterImg: udazzyEventImg12, singleMarkerImg: udazzyEventImg11} } />*/}
+
+              <Mapbox.Images>
+                <Mapbox.Image name="singleMarkerImage">
+                  <View style={styles.markerImageContainer} pointerEvents="none">
+                    <Yacht width={24} height={24} fill='#E4E4E4'/>
+                  </View>
+                </Mapbox.Image>
+                <Mapbox.Image name="clusterImg">
+                  <View style={styles.markerImageContainer} pointerEvents="none">
+                    <NightClub width={24} height={24} fill='#E4E4E4'/>
+                  </View>
+                </Mapbox.Image>
+              </Mapbox.Images>
+
+              {/*Clustered marker image*/}
+              <Mapbox.SymbolLayer
+                  id="clusteredMarkersImage"
+                  filter={['has', 'point_count']}
+                  style={styles.clusteredMarkersImage}
+              />
+              {/*Clustered marker image circle*/}
+              <Mapbox.CircleLayer
+                  id="clusteredMarkerImageCircle"
+                  belowLayerID="clusteredMarkersImage"
+                  filter={['has', 'point_count']}
+                  style={styles.clusteredMarkersImageCircle}
+              />
+              {/*Cluster marker count*/}
               <Mapbox.SymbolLayer
                 id="clusteredMarkerCount"
                 style={styles.markerCount}
                 filter={['has', 'point_count']}
               />
+              {/*Cluster marker count circle*/}
               <Mapbox.CircleLayer
                 id="clusteredMarkersCircle"
                 belowLayerID="clusteredMarkerCount"
@@ -75,22 +106,19 @@ export default function MapScreen({ navigation }) {
                 style={styles.markerCountCircle}
               />
 
-              <Mapbox.SymbolLayer
-                id="clusteredMarkersImage"
-                filter={['has', 'point_count']}
-                style={styles.clusterImage}
-              />
 
+              {/*Single marker image*/}
               <Mapbox.SymbolLayer
-                id="singleMarker"
-                filter={['!', ['has', 'point_count']]}
-                style={{
-                  iconImage: 'singleMarkerImg',
-                  iconSize: 0.4,
-                  // iconOpacity: 1,
-                  // iconAllowOverlap: true,
-                  // iconHaloBlur: 0
-                }}
+                  id="singleMarkerImage"
+                  filter={['!', ['has', 'point_count']]}
+                  style={styles.singleMarkerImage}
+              />
+              {/*Single marker image circle*/}
+              <Mapbox.CircleLayer
+                  id="singleMarkerImageCircle"
+                  belowLayerID="singleMarkerImage"
+                  filter={['!', ['has', 'point_count']]}
+                  style={styles.singleMarkerImageCircle}
               />
 
             </Mapbox.ShapeSource>
@@ -114,38 +142,55 @@ const styles = StyleSheet.create({
   map: {
     flex: 1
   },
-  markerContainer: {
+  markerImageContainer: {
     width: 50,
     height: 50,
     borderRadius: 50,
-    backgroundColor: ["#1C1B27", "#1D1C28"],
+    backgroundColor: "#1C1B27",
     justifyContent: "center",
-    alignItems: "center"
-    // borderWidth: 1,
-    // borderColor: '#8c4fef'
+    alignItems: "center",
   },
-  clusterImage: {
+  clusteredMarkersImage: {
     iconImage: 'clusterImg',
-    iconSize: 0.5,
+    //iconSize: 0.5,
     iconAllowOverlap: true,
-    iconIgnorePlacement: true
+    iconIgnorePlacement: false,
   },
-
+  clusteredMarkersImageCircle: {
+    circlePitchAlignment: 'map',
+    circleRadius: 26,
+    circleStrokeWidth: 1,
+    circleStrokeColor: '#8c4fef',
+    circleOpacity: 0
+  },
   markerCount: {
     textField: '{point_count}',
-    textSize: 15,
+    textSize: 12,
     textPitchAlignment: 'map',
-    textOffset: [2, -1.6],
+    textOffset: [2, -1.8],
     textColor: 'white',
     textAllowOverlap: true,
   },
   markerCountCircle: {
     circlePitchAlignment: 'map',
     circleColor: '#8c4fef',
-    circleRadius: 12,
+    circleRadius: 10,
     circleStrokeWidth: 1,
     circleStrokeColor: 'black',
-    circleTranslate: [30, -24]
+    circleTranslate: [24, -22]
+  },
+
+  singleMarkerImage: {
+    iconImage: 'singleMarkerImage',
+    iconAllowOverlap: true,
+    iconIgnorePlacement: true
+  },
+  singleMarkerImageCircle: {
+    circlePitchAlignment: 'map',
+    circleRadius: 26,
+    circleStrokeWidth: 1,
+    circleStrokeColor: '#8c4fef',
+    circleOpacity: 1
   },
 
 });
