@@ -12,7 +12,7 @@
 - execute command: ```npm run android``` for android
 - execute command: ```npm run ios``` for ios
 ***
-![MapboxClusters.gif](MapboxClusters.gif)
+![MapboxReactNativeCluster.gif](MapboxReactNativeCluster.gif)
 ![img.png](img.png)
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
